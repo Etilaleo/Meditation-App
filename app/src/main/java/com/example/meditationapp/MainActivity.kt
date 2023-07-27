@@ -13,7 +13,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MeditationAppTheme {
-
+                Surface(
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                }
             }
         }
     }

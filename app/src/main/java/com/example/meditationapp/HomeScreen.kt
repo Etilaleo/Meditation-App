@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -26,6 +27,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.meditationapp.ui.theme.AllButtonColors
 import com.example.meditationapp.ui.theme.MainBackgroundColor
 import com.example.meditationapp.ui.theme.SelectedMedType
 import com.example.meditationapp.ui.theme.UnselectedMedType
@@ -45,11 +47,17 @@ fun HomeScreen() {
             .padding(18.dp)
     ) {
         GreetingTopBar()
-        TypeOfMeditation(listOf(
-            MeditationType(0, "Sweet sleep"),
-            MeditationType(1, "Insomnia"),
-            MeditationType(2, "Depression")
-        ))
+        TypeOfMeditation(
+            listOf(
+                MeditationType(0, "Sweet sleep"),
+                MeditationType(1, "Insomnia"),
+                MeditationType(2, "Depression")
+            )
+        )
+        DailyThought(
+            firstText = "Daily Thought",
+            secondText = "Meditation \u2022 3-10 min"
+        )
     }
 }
 
@@ -77,7 +85,7 @@ fun GreetingTopBar() {
                 )
                 Text(
                     text = "We wish you have a good day!",
-                    fontSize = 13.sp,
+                    fontSize = 15.sp,
                     color = Color.Gray
                 )
             }
@@ -127,9 +135,61 @@ fun TypeOfMeditation(
                 ) {
                     Text(
                         text = it.itemText,
-                        color = White
+                        color = White,
+                        fontSize = 17.sp
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun DailyThought(
+    firstText: String,
+    secondText: String
+) {
+    Box(
+        modifier = Modifier
+            .clip(RoundedCornerShape(12.dp))
+            .background(com.example.meditationapp.ui.theme.DailyThought)
+            .padding(15.dp)
+            .fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Column(
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                Text(
+                    text = firstText,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = White
+                )
+                Text(
+                    text = secondText,
+                    fontSize = 15.sp,
+                    color = White
+                )
+            }
+            Box(
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(CircleShape)
+                    .background(AllButtonColors)
+                    .padding(6.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_play),
+                    contentDescription = null,
+                    tint = White
+                )
             }
         }
     }
