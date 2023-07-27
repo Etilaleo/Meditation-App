@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,7 +36,7 @@ import com.example.meditationapp.ui.theme.White
 
 @Preview(showBackground = true)
 @Composable
-fun SecondDefaultPreview() {
+fun DefaultPreview() {
     HomeScreen()
 }
 
@@ -51,13 +52,15 @@ fun HomeScreen() {
             listOf(
                 MeditationType(0, "Sweet sleep"),
                 MeditationType(1, "Insomnia"),
-                MeditationType(2, "Depression")
+                MeditationType(2, "Depression"),
+                MeditationType(3, "Anxiety")
             )
         )
         DailyThought(
             firstText = "Daily Thought",
             secondText = "Meditation \u2022 3-10 min"
         )
+        Spacer(modifier = Modifier.padding(vertical = 20.dp))
     }
 }
 
