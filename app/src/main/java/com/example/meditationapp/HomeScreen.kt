@@ -8,9 +8,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,6 +33,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.meditationapp.ui.theme.AllButtonColors
+import com.example.meditationapp.ui.theme.FeaturedCardColors1
+import com.example.meditationapp.ui.theme.FeaturedCardColors2
+import com.example.meditationapp.ui.theme.FeaturedCardColors3
+import com.example.meditationapp.ui.theme.FeaturedCardColors4
 import com.example.meditationapp.ui.theme.MainBackgroundColor
 import com.example.meditationapp.ui.theme.SelectedMedType
 import com.example.meditationapp.ui.theme.UnselectedMedType
@@ -61,6 +69,28 @@ fun HomeScreen() {
             secondText = "Meditation \u2022 3-10 min"
         )
         Spacer(modifier = Modifier.padding(vertical = 20.dp))
+        FeaturedContent(listOf(
+            FeaturedMed(
+                "Sleep Meditation",
+                painterResource(id = R.drawable.ic_headphone),
+                FeaturedCardColors1
+            ),
+            FeaturedMed(
+                "Tips for sleeping",
+                painterResource(id = R.drawable.ic_videocameta),
+                FeaturedCardColors2
+            ),
+            FeaturedMed(
+                "Night island",
+                painterResource(id = R.drawable.ic_headphone),
+                FeaturedCardColors3
+            ),
+            FeaturedMed(
+                "Calming Sounds",
+                painterResource(id = R.drawable.ic_headphone),
+                FeaturedCardColors4
+            )
+        ))
     }
 }
 
@@ -193,6 +223,75 @@ fun DailyThought(
                     contentDescription = null,
                     tint = White
                 )
+            }
+        }
+    }
+}
+
+@Composable
+fun FeaturedContent(
+    itemList: List<FeaturedMed>
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(15.dp)
+    ) {
+        Text(
+            text = " Featured",
+            fontSize = 27.sp,
+            color = White,
+            fontWeight = FontWeight.Bold
+        )
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(2),
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            items(itemList) {
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(it.backgroundColor)
+                        .padding(10.dp)
+                ) {
+                    Column(
+                        verticalArrangement = Arrangement.SpaceBetween,
+                        modifier = Modifier
+                            .height(140.dp)
+                    ) {
+                        Text(
+                            text = it.itemText,
+                            fontSize = 20.sp,
+                            color = White,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Icon(
+                                painter = it.icon,
+                                contentDescription = null,
+                                tint = White,
+                                modifier = Modifier
+                                    .size(24.dp)
+                            )
+                            Box(
+                                modifier = Modifier
+                                    .size(width = 60.dp, height = 30.dp)
+                                    .clip(RoundedCornerShape(12.dp))
+                                    .background(AllButtonColors)
+                                    .padding(6.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Text(
+                                    text = "Start",
+                                    color = White
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
     }
