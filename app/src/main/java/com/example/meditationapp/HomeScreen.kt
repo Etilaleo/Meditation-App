@@ -236,7 +236,7 @@ fun FeaturedContent(
         verticalArrangement = Arrangement.spacedBy(15.dp)
     ) {
         Text(
-            text = " Featured",
+            text = "Featured",
             fontSize = 27.sp,
             color = White,
             fontWeight = FontWeight.Bold
